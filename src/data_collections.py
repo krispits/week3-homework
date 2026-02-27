@@ -1,34 +1,58 @@
 """
-Uzdevums 1: Datu kolekcijas praksē
-Mērķis: iepazīt sarakstus (list) un vārdnīcas (dict) — datu struktūras, kas nepieciešamas
-visiem turpmākajiem uzdevumiem.
-Izveido data_collections.py, kas:
-A daļa — Saraksti:
-• Izveido sarakstu ar 5+ skaitļiem; pievieno elementu ar .append(), dzēš ar .pop()
-• Aprēķina saraksta summu un vidējo vērtību ar for ciklu (nelietojot sum()/len() — lai
-saprastu mehāniku)
-• Filtrē sarakstu: izveido jaunu sarakstu tikai ar pāra skaitļiem (for + if)
-• Demonstrē šķēlumu (slice): pirmie 3, pēdējie 2, katrs otrais elements
-B daļa — Vārdnīcas:
-• Izveido vārdnīcu ar 3+ studentiem: {"Anna": 85, "Jānis": 72, "Līga": 95}
-• Pievieno jaunu studentu; maina esošu atzīmi
-• Iterē ar for name, grade in studenti.items(): un izvada katru
-• Atrod studentu ar augstāko atzīmi (for cikls pa vārdnīcu)
-C daļa — Kombinācija:
-• Izveido sarakstu ar vārdnīcām: [{"name": "Anna", "grade": 85}, ...]
-• Filtrē: tikai studenti ar atzīmi >= 80
-• Izmanto enumerate() un f-strings formatētai izvadei: "1. Anna — 85"
-python data_collections.py
-# --- Saraksti ---
-# Summa: 45, Vidējais: 9.0
-# Pāra skaitļi: [2, 4, 6, 8, 10]
-# Pirmie 3: [1, 2, 3], Pēdējie 2: [9, 10]
-# --- Vārdnīcas ---
-# Anna: 85
-# Jānis: 72
-# ...
-# Labākais students: Līga (95)
-# --- Studenti ar atzīmi >= 80 ---
-# 1. Anna — 85
-# 2. Līga — 95
+C daļā gan es izvēlējos nepārrakstīt ar roku, jo B daļā ja mainas studentu vārdi
+un atzīmes, tā dēļ izvēlējos automatizēt un paņemt datus no B daļas.
 """
+print("\n" + "\"A daļa — Saraksti:".center(80,"*") + "\n")
+numbers = [1, 4, 23, 5, 21, 10, 3]
+numbers.append(7) #pievieno elementu
+numbers.pop(0) #dzēš elementu pēc indeksa, šajā gadījumā dzēš pirmo elementu (1)
+
+summa = 0
+total_numbers = 0
+para_skaitli = []
+
+for num in numbers: 
+    summa += num 
+    total_numbers += 1
+    if num % 2 == 0: 
+        print (f"{num} - pāra skaitlis")
+        para_skaitli.append(num) #ieliekam pāra skaitli para_skaitli sarakstā
+    else:
+        print (f"{num} - nepāra skaitlis")
+
+
+print(f"\nKopējais skaits: {total_numbers}")
+print(f"Summa: {summa}")
+print(f"Vidējais skaitlis: {summa / total_numbers}")
+print(f"Pāra skaitļi: {para_skaitli}")
+
+print("\n" + "B daļa — Vārdnīcas:".center(80,"*") + "\n")
+
+
+students = {"Anna": 85, "Jānis": 72, "Līga": 95}
+print(f"\nStudenti sākumā: {students}")
+students["Pēteris"] = 78 #pievieno jaunu studentu
+students["Jānis"] = 75 #maina esošu atzīmi
+
+#grade = 0. <-- šis ir lieki, jo for ciklā tiek izveidots mainīgais grade, kurā glabāt.
+max_grade = 0
+best_student = ""
+for name, grade in students.items():
+    print(f"{name}: {grade}")
+    if grade > max_grade:
+        max_grade = grade
+        best_student = name
+
+print(f"\nLabākais students: {best_student} ({max_grade})")
+
+print("\n" + "C daļa — Kombinācija:".center(80,"*") + "\n")
+
+student_list = []
+for name, grade in students.items():
+    student_list.append({"name": name, "grade": grade})
+high_achievers = []
+for student in student_list:
+    if student["grade"] >= 80:
+        high_achievers.append(student)
+for index, student in enumerate(high_achievers, start=1):
+    print(f"{index}. {student['name']} — {student['grade']}")
