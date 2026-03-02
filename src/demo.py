@@ -23,18 +23,17 @@ from validators import is_strong_password, is_valid_date
 
 print("=== Utils demonstrācija ===")
 try:    
-    name = "Anna"
+    name = "rīga"
     greeting = greet(name)
     print(f"greet('{name}') → '{greeting}'")
     
     text = "hello"
     capitalized = capitalize(text)
     print(f"capitalize('{text}') → '{capitalized}'")
-    
+     
     numbers = [10, 20, 30]
     avg = average(numbers)
     print(f"average({numbers}) → {avg}")
-    invalid_factorial = factorial(-1)
 
 except ValueError as e:
     print(f"factorial(-1) → ValueError: {e}")
